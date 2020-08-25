@@ -1,4 +1,0 @@
----
-SENSU_NAMESPACE: "Set your namespace here"
-SENSU_SUBSCRIPTION: "Set your subsription here"
-SENSU_BACKEND: "Set your backend URL here"

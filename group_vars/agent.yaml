@@ -1,0 +1,5 @@
+---
+SENSU_NAMESPACE: "Set your sensu namespace here"
+SENSU_SUBSCRIPTION: "Set your subsription here"
+SENSU_BACKEND: "Set your sensu backend URL here"
+SENSU_BACKEND_IP: "Set your sensu backend IP here"

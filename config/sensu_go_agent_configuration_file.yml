@@ -1,6 +1,11 @@
 ---
+  - name: "Loading vars"
+    include_vars: group_vars/agent.yaml
+
   - name: "Adding Sensu Backend To hosts File"
-    shell: echo "41.128.178.133	sensu02.fixed.ninja" >> /etc/hosts
+    lineinfile:
+      path: /etc/hosts
+      line: "{{ SENSU_BACKEND_IP }} {{ SENSU_BACKEND }}"
 
   - name: "applying sensu-go agent config"
     template:
