@@ -1,0 +1,68 @@
+---
+  - name: "Downloading rbenv Package from Github"
+    become_user: sensu
+    git:
+      repo: https://github.com/sstephenson/rbenv.git
+      dest: /home/sensu/.rbenv
+
+  - name: "Downloading ruby-build Packages from Github"
+    become_user: sensu
+    git:
+      repo: https://github.com/sstephenson/ruby-build.git
+      dest: /home/sensu/.rbenv/plugins/ruby-build
+
+  - name: "Updating .bash_profile"
+    blockinfile:
+      path: /home/sensu/.bash_profile
+      block: |
+        export PATH="$HOME/.rbenv/bin:$PATH"
+        eval "$(rbenv init -)"
+        export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+      owner: sensu
+      group: sensu
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'CloudLinux'
+
+  - name: "Updating .bashrc"
+    blockinfile:
+      path: /home/sensu/.bashrc
+      block: |
+        export PATH="$HOME/.rbenv/bin:$PATH"
+        eval "$(rbenv init -)"
+      owner: sensu
+      group: sensu
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+  - name: "Installing Ruby 2.5.8"
+    become_user: sensu
+    shell: /home/sensu/.rbenv/bin/rbenv install -v 2.5.8
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+  - name: "Installing Ruby 2.5.8"
+    become_user: sensu
+    shell: TMPDIR=/home/sensu/ /home/sensu/.rbenv/bin/rbenv install -v 2.5.8
+    when: ansible_distribution == 'CloudLinux'
+
+  - name: "Globaling 2.5.8"
+    become_user: sensu
+    shell: /home/sensu/.rbenv/bin/rbenv global 2.5.8
+
+  - name: "Installing Plugins"
+    become_user: sensu
+    shell: | 
+       /home/sensu/.rbenv/shims/gem install sensu-plugin
+       /home/sensu/.rbenv/shims/gem install sensu-plugins-disk-checks
+
+  - name: "Changing Sesnu User Shell to false"
+    user:
+      name: sensu
+      shell: /bin/false
+
+  - import_tasks: config/sensu_go_agent_configuration_file.yml
+
+  - name: "Starting Sensu Go Agent Service"
+    service:
+      name: sensu-agent
+      state: restarted
+      enabled: yes
+
+

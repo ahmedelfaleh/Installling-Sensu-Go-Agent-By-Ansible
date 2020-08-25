@@ -1,0 +1,9 @@
+---
+  - name: "Adding Sensu Backend To hosts File"
+    shell: echo "41.128.178.133	sensu02.fixed.ninja" >> /etc/hosts
+
+  - name: "applying sensu-go agent config"
+    template:
+      src: templates/agent.yml.j2
+      dest: /etc/sensu/agent.yml
+
