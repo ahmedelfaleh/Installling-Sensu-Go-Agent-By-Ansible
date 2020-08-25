@@ -5,7 +5,7 @@
 # agent overview
 ##
 #name: "hostname"
-namespace: "eehcvms"
+namespace: '{{ namespace }}'
 subscriptions:
   - system
 #labels:
@@ -17,7 +17,7 @@ subscriptions:
 # agent configuration
 ##
 backend-url:
-  - "wss://sensu02.fixed.ninja:5666"
+  - "wss://'{{ backendurl }}':5666"
 #cache-dir: "/var/cache/sensu/sensu-agent"
 #config-file: "/etc/sensu/agent.yml"
 #disable-assets: false
