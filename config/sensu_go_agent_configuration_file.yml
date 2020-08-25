@@ -5,7 +5,7 @@
   - name: "Adding Sensu Backend To hosts File"
     lineinfile:
       path: /etc/hosts
-      line: "{{ SENSU_BACKEND_IP }} {{ SENSU_BACKEND }}"
+      line: {{ SENSU_BACKEND_IP }} {{ SENSU_BACKEND }}
 
   - name: "applying sensu-go agent config"
     template:

@@ -7,7 +7,7 @@
 #name: "hostname"
 namespace: "{{ SENSU_NAMESPACE }}"
 subscriptions:
-  - "{{ SENSU_SUBSCRIPTION }}"
+  - {{ SENSU_SUBSCRIPTION }}
 #labels:
 #  example_key: "example value"
 #annotations:
@@ -17,7 +17,7 @@ subscriptions:
 # agent configuration
 ##
 backend-url:
-  - "wss://"{{ SENSU_BACKEND }}":5666"
+  - "wss://{{ SENSU_BACKEND }}:5666"
 #cache-dir: "/var/cache/sensu/sensu-agent"
 #config-file: "/etc/sensu/agent.yml"
 #disable-assets: false
