@@ -4,7 +4,7 @@
 1. Clone the repositroy
 2. Install ansible
 3. Run the follwoing command:
-	* ansible-playbook install_sensu_go_agent.yml
+	``` $ ansible-playbook install_sensu_go_agent.yml ```
 
 ## **How it works**
 This installer constests of config, setup and templates.
