@@ -50,7 +50,7 @@
     become_user: sensu
     shell: | 
        /opt/sensu/.rbenv/shims/gem install sensu-plugin
-       /opt/sensu/.rbenv/shims/gem install sensu-plugins-disk-check
+       /opt/sensu/.rbenv/shims/gem install sensu-plugins-disk-checks
 
   - name: "Linking Ruby to /usr/sbin/"
     file:
