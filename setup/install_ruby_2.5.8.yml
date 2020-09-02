@@ -3,30 +3,30 @@
     become_user: sensu
     git:
       repo: https://github.com/sstephenson/rbenv.git
-      dest: /home/sensu/.rbenv
+      dest: /opt/sensu/.rbenv
 
   - name: "Downloading ruby-build Packages from Github"
     become_user: sensu
     git:
       repo: https://github.com/sstephenson/ruby-build.git
-      dest: /home/sensu/.rbenv/plugins/ruby-build
+      dest: /opt/sensu/.rbenv/plugins/ruby-build
 
   - name: "Updating .bash_profile"
     blockinfile:
-      path: /home/sensu/.bash_profile
+      path: /opt/sensu/.bash_profile
       block: |
-        export PATH="$HOME/.rbenv/bin:$PATH"
+        export PATH="/opt/sensu/.rbenv/bin:$PATH"
         eval "$(rbenv init -)"
-        export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+        export PATH="/opt/sensu/.rbenv/plugins/ruby-build/bin:$PATH"
       owner: sensu
       group: sensu
     when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'CloudLinux'
 
   - name: "Updating .bashrc"
     blockinfile:
-      path: /home/sensu/.bashrc
+      path: /opt/sensu/.bashrc
       block: |
-        export PATH="$HOME/.rbenv/bin:$PATH"
+        export PATH="/opt/sensu/.rbenv/bin:$PATH"
         eval "$(rbenv init -)"
       owner: sensu
       group: sensu
@@ -34,23 +34,33 @@
 
   - name: "Installing Ruby 2.5.8"
     become_user: sensu
-    shell: /home/sensu/.rbenv/bin/rbenv install -v 2.5.8
+    shell: /opt/sensu/.rbenv/bin/rbenv install -v 2.5.8
     when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
   - name: "Installing Ruby 2.5.8"
     become_user: sensu
-    shell: TMPDIR=/home/sensu/ /home/sensu/.rbenv/bin/rbenv install -v 2.5.8
+    shell: TMPDIR=/opt/sensu/ /opt/sensu/.rbenv/bin/rbenv install -v 2.5.8
     when: ansible_distribution == 'CloudLinux'
 
   - name: "Globaling 2.5.8"
     become_user: sensu
-    shell: /home/sensu/.rbenv/bin/rbenv global 2.5.8
+    shell: /opt/sensu/.rbenv/bin/rbenv global 2.5.8
 
   - name: "Installing Plugins"
     become_user: sensu
     shell: | 
-       /home/sensu/.rbenv/shims/gem install sensu-plugin
-       /home/sensu/.rbenv/shims/gem install sensu-plugins-disk-checks
+       /opt/sensu/.rbenv/shims/gem install sensu-plugin
+       /opt/sensu/.rbenv/shims/gem install sensu-plugins-disk-check
+
+  - name: "Linking Ruby to /usr/sbin/"
+    file:
+      src: /opt/sensu/.rbenv/shims/ruby
+      dest: /usr/sbin/ruby
+      owner: sensu
+      group: sensu
+      state: link
+    tags:
+      - linking
 
   - name: "Changing Sesnu User Shell to false"
     user:
@@ -64,5 +74,3 @@
       name: sensu-agent
       state: restarted
       enabled: yes
-
-
