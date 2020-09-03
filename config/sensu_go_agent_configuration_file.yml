@@ -1,20 +1,20 @@
 ---
-#  - name: "Loading vars"
-#    include_vars: group_vars/agent.yaml
+  - name: "Loading vars"
+    include_vars: group_vars/agent.yaml
 
   - name: "Adding Sensu Backend To hosts File"
     lineinfile:
       path: /etc/hosts
       line: "{{ SENSU_BACKEND_IP }} {{ SENSU_BACKEND }}"
 
-  - name: "applying sensu-go agent config"
+  - name: "Applying Sensu Go Agent Config Files"
     template:
       src: templates/agent.yml.j2
       dest: /etc/sensu/agent.yml
-    with_items:
-      - "{{ item.SENSU_NAMESPACE }}"
-      - "{{ item.SENSU_SUBSCRIPTION }}"
-      - "{{ item.SENSU_BACKEND }}"
-      - "{{ item.SENSU_BACKEND_IP }}"
-      - "{{ item.SENSU_PORT }}"
+#    with_items:
+#      - "{{ item.SENSU_NAMESPACE }}"
+#      - "{{ item.SENSU_SUBSCRIPTION }}"
+#      - "{{ item.SENSU_BACKEND }}"
+#      - "{{ item.SENSU_BACKEND_IP }}"
+#      - "{{ item.SENSU_PORT }}"
 

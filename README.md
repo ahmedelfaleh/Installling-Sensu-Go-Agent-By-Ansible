@@ -28,7 +28,7 @@ This playbook is ready for the following distributions:
 4. Ubuntu 16.04, 18.04 and 20.04
 5. CloudLinux on CentOS 7 and it can modified to work on CentOS 8 if needed
 
-When use AWX, you have to set these variables like the following:
+When use AWX, you have to comment the first task name "Loading Vars" and comment out with_items in the third task name "Applying Sensu Go Agent Config File" and set these variables like the following:
 
 ```
 ---
