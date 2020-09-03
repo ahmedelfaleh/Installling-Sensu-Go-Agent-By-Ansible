@@ -4,18 +4,6 @@
       name: '*'
       state: latest
 
-  - name: "Installing Required Packages"
-    yum:
-      name: '{{ packages }}'
-    vars:
-      packages:
-          - wget
-          - vim
-          - net-tools
-          - rsync
-          - epel-release
-      state: installed
-
   - name: "Downloading Sensu Go Agent Repository"
     get_url:
       url: https://packagecloud.io/install/repositories/sensu/stable/script.rpm.sh
