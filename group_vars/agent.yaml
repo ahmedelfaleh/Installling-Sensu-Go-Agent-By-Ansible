@@ -1,6 +1,8 @@
+---
 SENSU_NAMESPACE: my_namespace
 SENSU_SUBSCRIPTION: sub_name
 SENSU_BACKEND: be_url.tls
 SENSU_BACKEND_IP: xx.xx.xx.xx
 PORT: xxxx
+
 
