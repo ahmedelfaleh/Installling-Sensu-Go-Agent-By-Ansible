@@ -27,3 +27,4 @@ When you run the installer inital playbook install_sensu_go_agent.yml the logic 
 3. Debian 8, 9 and 10
 4. Ubuntu 16.04, 18.04 and 20.04
 5. CloudLinux on CentOS 7 and it can modified to work on CentOS 8 if needed
+6. Check AWX branch if you want to run this playbook by AWX inventory.
