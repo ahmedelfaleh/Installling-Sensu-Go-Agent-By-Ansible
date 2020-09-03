@@ -17,7 +17,7 @@ subscriptions:
 # agent configuration
 ##
 backend-url:
-  - "wss://{{ SENSU_BACKEND }}:5666"
+  - "wss://{{ SENSU_BACKEND }}:{{ SENSU_PORT }}"
 #cache-dir: "/var/cache/sensu/sensu-agent"
 #config-file: "/etc/sensu/agent.yml"
 #disable-assets: false

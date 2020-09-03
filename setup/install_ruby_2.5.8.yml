@@ -20,7 +20,7 @@
         export PATH="/opt/sensu/.rbenv/plugins/ruby-build/bin:$PATH"
       owner: sensu
       group: sensu
-    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'CloudLinux'
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'CloudLinux'
 
   - name: "Updating .bashrc"
     blockinfile:
@@ -35,7 +35,7 @@
   - name: "Installing Ruby 2.5.8"
     become_user: sensu
     shell: /opt/sensu/.rbenv/bin/rbenv install -v 2.5.8
-    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
   - name: "Installing Ruby 2.5.8"
     become_user: sensu

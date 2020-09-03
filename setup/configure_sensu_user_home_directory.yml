@@ -18,7 +18,7 @@
       - .bash*
 #      - .bash_profile
 #      - .bash_history
-    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'CloudLinux'
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'CloudLinux'
 
   - name: "Copying bash* Files - Debian & Ubuntu"
     shell: cp /root/{{ item }} /opt/sensu/
@@ -41,7 +41,7 @@
 #      insertbefore: '^# %wheel'
 #      line: '%sensu ALL=(ALL) NOPASSWD: ALL'
 #      validate: 'visudo -cf %s'
-#    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'CloudLinux'
+#    when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'CloudLinux'
 #
 #  - name: "Add User To SUDO Without Password"
 #    lineinfile:
@@ -54,7 +54,7 @@
 
 
   - import_tasks: setup/rhel_family/rhel_prep_for_ruby.yml
-    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'CloudLinux'
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'CloudLinux'
 
   - import_tasks: setup/debian_family/debian_prep_for_ruby.yml
     when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
