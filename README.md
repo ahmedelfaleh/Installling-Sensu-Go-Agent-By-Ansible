@@ -21,7 +21,7 @@ When you run the installer inital playbook install_sensu_go_agent.yml the logic 
   and
   * other-dists_srvrs.yml - *prepared so far for Cloudlinux distribution*
 
-### This playbook is ready for the following distributions: ###
+#### This playbook is ready for the following distributions:
 1. Red Hat Enterprise Linux 7 and 8
 2. CentOS 7 and 8
 3. Debian 8, 9 and 10
