@@ -49,8 +49,14 @@
   - name: "Installing Plugins"
     become_user: sensu
     shell: | 
-       /opt/sensu/.rbenv/shims/gem install sensu-plugin
-       /opt/sensu/.rbenv/shims/gem install sensu-plugins-disk-checks
+       /opt/sensu/.rbenv/shims/gem install '{{ item }}'
+    loop:
+      - sensu-plugin
+      - sensu-plugins-disk-checks
+      - sensu-plugins-nginx
+      - sensu-plugins-http
+    tags:
+      - plugins
 
   - name: "Linking Ruby to /usr/sbin/"
     file:
