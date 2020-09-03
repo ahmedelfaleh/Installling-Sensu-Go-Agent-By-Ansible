@@ -27,14 +27,5 @@ This playbook is ready for the following distributions:
 3. Debian 8, 9 and 10
 4. Ubuntu 16.04, 18.04 and 20.04
 5. CloudLinux on CentOS 7 and it can modified to work on CentOS 8 if needed
+6. Check AWX branch if you want to deploy via AWX.
 
-When use AWX, you have to set these variables like the following:
-
-```
----
-- {SENSU_NAMESPACE:my_namespace}
-- {SENSU_SUBSCRIPTION:sub_name}
-- {SENSU_BACKEND:sensu_url.tls}
-- {SENSU_BACKEND_IP:xx.xx.xx.xx}
-- {PORT:xxxx}
-```
