@@ -10,7 +10,7 @@
       dest: /root/
 
   - name: "Adding Sensu Go Agent Repositroy"
-    shell: bash /root/script.rpm.sh
+    shell: /bin/bash /root/script.rpm.sh
   
   - name: "Installing Sensu Go Agent Package"
     yum:

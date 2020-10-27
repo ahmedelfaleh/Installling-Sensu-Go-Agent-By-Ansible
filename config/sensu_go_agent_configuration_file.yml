@@ -5,16 +5,16 @@
   - name: "Adding Sensu Backend To hosts File"
     lineinfile:
       path: /etc/hosts
-      line: "{{ SENSU_BACKEND_IP }} {{ SENSU_BACKEND }}"
+      line: "{{ item.SENSU_BACKEND_IP }} {{ item.SENSU_BACKEND }}"
+    with_items:
+      - "{{ SENSU_CONFIGS }}"
 
   - name: "applying sensu-go agent config"
     template:
       src: templates/agent.yml.j2
       dest: /etc/sensu/agent.yml
     with_items:
-      - "{{ item.SENSU_NAMESPACE }}"
-      - "{{ item.SENSU_SUBSCRIPTION }}"
-      - "{{ item.SENSU_BACKEND }}"
-      - "{{ item.SENSU_BACKEND_IP }}"
-      - "{{ item.SENSU_PORT }}"
+      - "{{ SENSU_CONFIGS }}"
+  
+
 

@@ -4,7 +4,7 @@
   tasks:
 # Redhat And Centos
     - import_tasks: setup/rhel_family/rhel-family_srvrs.yml
-      when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' 
+      when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' 
 
 # Debain And Ubuntu
     - import_tasks: setup/debian_family/debian-family_srvrs.yml
